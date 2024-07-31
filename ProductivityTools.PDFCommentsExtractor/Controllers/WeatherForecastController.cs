@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace ProductivityTools.PDFCommentsExtractor.Controllers
+namespace ProductivityTools.PDFCommentsExtractor.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
