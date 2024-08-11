@@ -1,9 +1,12 @@
 ﻿
 
 using PdfSharp.Pdf;
+using PdfSharp.Pdf.Annotations;
 using PdfSharp.Pdf.Content;
 using PdfSharp.Pdf.Content.Objects;
 using System.IO.Pipes;
+using System.Reflection.Metadata;
+using System.Xml.Linq;
 
 namespace ProductivityTools.PDFCommentsExtractor.Manager
 {
@@ -39,7 +42,7 @@ namespace ProductivityTools.PDFCommentsExtractor.Manager
         public void Read()
         {
             //(
-            string path = @"D:\Trash\2024_33.pdf";
+            string path = @"D:\Trash\X1.pdf";
             PdfSharp.Pdf.PdfDocument doc = PdfSharp.Pdf.IO.PdfReader.Open(path);
             for (int i = 0; i < doc.PageCount; i++)
             {
@@ -54,10 +57,35 @@ namespace ProductivityTools.PDFCommentsExtractor.Manager
                     result += t;
                 }
 
+                for (int p = 0; p < doc.Pages[i].Annotations.Elements.Count; p++)
+                {
+                    PdfItem textAnnot = doc.Pages[i].Annotations.Elements.GetObject(p);
+                    //add specific item in "Results View" to CommentList here......
+                    Console.WriteLine("fdsa");
+                }
+
                 for (int j = 0; j < annotation.Count; j++)
                 {
                     var x = annotation[j].Contents;
+                    
                     Console.Write(annotation[j].ToString());
+                }
+
+            }
+
+            for (int i = 0; i < doc.PageCount; i++)
+            {
+                var page = doc.Pages[i];
+
+                for (int p = 0; p < doc.Pages[i].Annotations.Elements.Count; p++)
+                {
+                    PdfAnnotation textAnnot = doc.Pages[i].Annotations[p];
+
+                    string content = textAnnot.Contents;
+                    if (content != null)
+                    {
+                        Console.WriteLine("fdsa");                    }
+
                 }
             }
         }
